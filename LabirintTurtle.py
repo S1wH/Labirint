@@ -9,15 +9,17 @@ class LabirintTurtle():
         self.clear = True
 
     def load_map(self, file):
-        try:
-            line = 0
+                try:
             f = open(file, 'r')
-            for line in f:
-                if line.startswith(' ') or line.startswith('*'):
-                    self.map.append(list(line[:-1]))
-                    self.lab.append(list(line[:-1]))
-                else:
-                    break
+            line = f.readline()
+            length = len(line) - 1
+            while line.find('*') != -1 or line.find(' ') != - 1:
+                self.map.append(list(line[:-1]) + (length - len(line[:-1])) *
+                                [" "])
+                self.lab.append(list(line[:-1]) + (length - len(line[:-1])) *
+                                [" "])
+                line = f.readline()
+
             pos_x = int(line)
             pos_y = int(f.readline())
             self.turtle = [pos_x, pos_y]
